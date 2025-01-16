@@ -1,4 +1,4 @@
-<div class="min-h-screen  bg-gradient-to-b from-smoke-950 to-smoke-950">
+<div class="min-h-screen bg-gradient-to-b from-smoke-950 to-smoke-950">
   <!-- Header -->
   <app-header></app-header>
 
@@ -8,10 +8,11 @@
     <app-sidebar></app-sidebar>
 
     <!-- Main content - ajusta su margen según el estado del sidebar -->
-    <main 
+    <main
       class="flex-1 min-h-screen transition-all duration-300 pt-[72px]"
       [class.ml-64]="sidebarService.isOpen()"
-      [class.ml-0]="!sidebarService.isOpen()">
+      [class.ml-0]="!sidebarService.isOpen()"
+    >
       <div class="p-4">
         <h1 class="text-2xl font-semibold text-white">Contenido principal</h1>
         <router-outlet></router-outlet>

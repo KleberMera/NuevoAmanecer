@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 interface MenuItem {
   id: number;
   label: string;
@@ -10,13 +10,13 @@ interface MenuItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink,],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-  private sidebarService = inject(SidebarService);
-  isOpen = this.sidebarService.isOpen;
+  public _sidebarService = inject(SidebarService);
+  isOpen = this._sidebarService.isOpen;
 
   menuItems: MenuItem[] = [
     {
@@ -34,7 +34,5 @@ export class SidebarComponent {
     // Agregar más items según necesites
   ];
 
-  toggleSidebar(): void {
-    this.sidebarService.toggle();
-  }
+  
 }

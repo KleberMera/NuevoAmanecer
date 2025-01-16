@@ -1,19 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar.service';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   private sidebarService = inject(SidebarService);
-  unreadNotifications: number = 2;
-  userName: string = 'Usuario Admin';
-  userRole: string = 'Administrador';
-
+  isOpen = this.sidebarService.isOpen;
+  //unreadNotifications: number = 2;
+  unreadNotifications = signal<number>(2);
+  userName = signal<string>('Usuario Admin');
+  //userRole: string = 'Administrador';
+  userRole = signal<string>('Administrador');
   constructor() {}
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class HeaderComponent {
   }
 
 
-  isOpen = this.sidebarService.isOpen;
+ 
 
   toggleSidebar(): void {
     this.sidebarService.toggle();
