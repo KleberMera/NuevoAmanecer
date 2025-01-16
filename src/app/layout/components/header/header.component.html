@@ -1,0 +1,80 @@
+<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-smoke-800 px-6 py-3 shadow-lg">
+  <div class="flex items-center justify-between max-w-[1920px] mx-auto">
+    <!-- Logo y título -->
+    <div class="flex items-center space-x-4">
+      <!-- Botón hamburguesa (siempre visible) -->
+      <button 
+        (click)="toggleSidebar()"
+        class="p-2 text-smoke-400 hover:text-white hover:bg-smoke-800/50 rounded-lg ">
+        @if (isOpen()) {
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        } @else {
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12"/>
+            <line x1="4" x2="20" y1="6" y2="6"/>
+            <line x1="4" x2="20" y1="18" y2="18"/>
+          </svg>
+        }
+      </button>
+
+      <img src="logo_main.svg" alt="Logo" class="h-8 w-auto hover:opacity-80 transition-opacity">
+      <h1 class="hidden md:block text-2xl font-quicksand font-bold text-white select-none">
+        Nuevo 
+        <span class="bg-gradient-to-r from-peel-400 to-peel-600 text-transparent bg-clip-text">
+          Amanecer
+        </span>
+      </h1>
+    </div>
+
+
+    <!-- Menú derecho -->
+    <div class="flex items-center space-x-3">
+      <!-- Botón de notificaciones -->
+      <button 
+        class="relative p-2.5 text-smoke-400 hover:text-white hover:bg-smoke-800/50 rounded-lg transition-all duration-200"
+        (click)="toggleNotifications()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+          <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+        </svg>
+        @if (unreadNotifications > 0) {
+          <span class="absolute top-1 right-1 h-2 w-2 bg-peel-500 rounded-full ring-2 ring-smoke-950"></span>
+        }
+      </button>
+
+      <!-- Botón de configuración -->
+      <button 
+        class="p-2.5 text-smoke-400 hover:text-white hover:bg-smoke-800/50 rounded-lg transition-all duration-200"
+        (click)="toggleSettings()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </button>
+
+      <!-- Separador -->
+      <div class="hidden sm:block h-6 w-px bg-smoke-700/50"></div>
+
+      <!-- Perfil de usuario -->
+      <button 
+        class="flex items-center space-x-3 p-2 text-smoke-400 hover:text-peel-500 hover:bg-smoke-800/50 rounded-lg transition-all duration-200"
+        (click)="toggleProfile()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 20a6 6 0 0 0-12 0"/>
+          <circle cx="12" cy="10" r="4"/>
+          <circle cx="12" cy="12" r="10"/>
+        </svg>
+        <div class="hidden sm:block text-left">
+          <p class="text-sm font-medium text-white">{{ userName }}</p>
+          <p class="text-xs text-smoke-400">{{ userRole }}</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-smoke-400">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
