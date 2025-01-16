@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  showPassword = signal<boolean>(false);
 
+  togglePasswordVisibility() {
+    
+  }
 }
