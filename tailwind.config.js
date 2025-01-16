@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
     extend: {
+      fontFamily: {
+        'quicksand': ['Quicksand', 'sans-serif'],
+      },
       colors: {
         peel: {
           50: "#fffbeb",

@@ -9,7 +9,4 @@ import { Component, signal } from '@angular/core';
 export class LoginComponent {
   showPassword = signal<boolean>(false);
 
-  togglePasswordVisibility() {
-    
-  }
 }
