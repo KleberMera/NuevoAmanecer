@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { SidebarService } from '../../../services/sidebar.service';
+import { ViewportService } from '../../../services/viewport.service';
 
 interface MenuItem {
   id: number;
@@ -19,9 +20,9 @@ interface MenuItem {
 })
 export class SidebarItemsComponent {
   private readonly router = inject(Router);
+ //private readonly router = inject(Router);
   private readonly sidebarService = inject(SidebarService);
-  private readonly destroyRef = inject(DestroyRef);
-  private lastWidth = window.innerWidth;
+  private readonly viewportService = inject(ViewportService);
   menuItems: MenuItem[] = [
     {
       id: 1,
@@ -38,34 +39,18 @@ export class SidebarItemsComponent {
     // Agregar más items según necesites
   ];
 
-  constructor() {
-    // Observador del evento resize usando RxJS
-    fromEvent(window, 'resize')
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        const currentWidth = window.innerWidth;
-        const isMobileToDesktop = this.lastWidth < 768 && currentWidth >= 768;
-        const isDesktopToMobile = this.lastWidth >= 768 && currentWidth < 768;
+  
+ 
 
-        if (isMobileToDesktop) {
-          // Si cambia de mobile a desktop, abrimos el sidebar
-          this.sidebarService.open();
-        } else if (isDesktopToMobile) {
-          // Si cambia de desktop a mobile, cerramos el sidebar
-          this.sidebarService.close();
-        }
 
-        this.lastWidth = currentWidth;
-      });
-  }
+
 
   protected manejarClickItem(ruta: string): void {
-    // Cerrar sidebar en mobile al hacer click en un item
-    if (window.innerWidth < 768) {
+    if (!this.viewportService.isDesktop()) {
       this.sidebarService.close();
     }
-    console.log(ruta);
-    const rutas = `home/${ruta}`;
+
+  const rutas = `home/${ruta}`;
     console.log(rutas);
     
     this.router.navigate([rutas]);
