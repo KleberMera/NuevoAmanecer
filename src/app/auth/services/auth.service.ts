@@ -23,7 +23,6 @@ export class AuthService {
         password: new FormControl(data.password, [
           Validators.required,
           Validators.minLength(8),
-          Validators.maxLength(10),
         ]),
       })
     );

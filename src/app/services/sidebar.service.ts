@@ -4,17 +4,21 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class SidebarService {
-  // Inicializamos como true para que esté abierto por defecto
-  private _isOpen = signal<boolean>(false);
-  isOpen = this._isOpen.asReadonly();
+  private readonly isOpenSignal = signal(window.innerWidth >= 768);
+
+  isOpen() {
+    return this.isOpenSignal();
+  }
 
   toggle() {
-    console.log(this._isOpen());
-    console.log(this.isOpen());
-    
-    
-    this._isOpen.update((value) => !value);
-    console.log(this._isOpen());
-    console.log(this.isOpen());
+    this.isOpenSignal.update(state => !state);
+  }
+
+  close() {
+    this.isOpenSignal.set(false);
+  }
+
+  open() {
+    this.isOpenSignal.set(true);
   }
 }

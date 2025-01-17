@@ -1,38 +1,18 @@
-<!-- Overlay (visible cuando el sidebar está abierto) -->
-@if (isOpen()) {
+@if (_sidebarService.isOpen()) {
   <div 
     class="fixed inset-0 bg-smoke-950/50 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden"
     (click)="_sidebarService.toggle()">
   </div>
 }
 
-<!-- Sidebar -->
-<aside 
-  class="fixed top-0 left-0 z-40 h-full w-64  border-r border-smoke-900 transform transition-transform duration-300"
-  [class.translate-x-0]="isOpen()"
-  [class.translate-x-[-100%]]="!isOpen()">
-  
-  <!-- Header del sidebar con padding superior para estar debajo del header principal -->
+<aside
+  class="fixed top-0 left-0 z-40 h-full w-64 border-r border-smoke-900 transform transition-transform duration-300"
+  [class.translate-x-0]="_sidebarService.isOpen()" 
+  [class.translate-x-[-100%]]="!_sidebarService.isOpen()">
   <div class="pt-[72px]">
-    <div class="p-4 ">
+    <div class="p-4">
       <h2 class="text-xl font-semibold text-white">Menú</h2>
     </div>
-
-    <!-- Navegación -->
-    <nav class="p-4">
-      <ul class="space-y-2">
-        @for (item of menuItems; track item.id) {
-          <li>
-            <a 
-              [routerLink]="item.route"
-              routerLinkActive="bg-peel-500/50 text-white"
-              class="flex items-center space-x-3 p-3 text-smoke-400 hover:text-white hover:bg-smoke-800/50 rounded-lg transition-all duration-200">
-              <span [innerHTML]="item.icon"></span>
-              <span>{{ item.label }}</span>
-            </a>
-          </li>
-        }
-      </ul>
-    </nav>
+    <app-sidebar-items></app-sidebar-items>
   </div>
 </aside>
