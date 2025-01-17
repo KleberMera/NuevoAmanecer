@@ -3,9 +3,8 @@
         @for (item of menuItems(); track item.id) {
         <li class="relative">
             <!-- Item principal -->
-            <div [class.bg-smoke-800]="isItemActive(item)" class="relative group">
+            <div [class.bg-smoke-800]="isItemActive(item)" class="relative group" (click)="manejarClickItem(item)">
                 <a [routerLink]="item.route" routerLinkActive="bg-peel-500/50 text-white"
-                    (click)="manejarClickItem(item)"
                     class="flex items-center justify-between w-full p-3 text-smoke-400 hover:text-white rounded-lg transition-all duration-200 group-hover:bg-smoke-800/50">
                     <div class="flex items-center space-x-3">
                         <span [innerHTML]="getSafeIcon(item.icon)" class="min-w-[20px]"></span>
@@ -13,7 +12,7 @@
                     </div>
                     @if (item.subitems?.length) {
                     <span class="transform transition-transform duration-200"
-                        [class.rotate-180]="expandedItems()[item.id]" (click)="manejarClickItem(item)">
+                        [class.rotate-180]="expandedItems()[item.id]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m6 9 6 6 6-6" />
