@@ -18,10 +18,14 @@
     </div>
 
     <!-- Formulario -->
-    <form class="space-y-7">
+    <form class="space-y-7"
+    
+      [formGroup]="form()"
+      (ngSubmit)="onSubmit()"
+    >
       <!-- Campo de usuario -->
       <div>
-        <label for="username" class="block text-sm font-medium text-smoke-300 mb-1.5">
+        <label for="user" class="block text-sm font-medium text-smoke-300 mb-1.5">
           Usuario
         </label>
         <div class="relative group">
@@ -33,9 +37,14 @@
               <path d="M20 21a8 8 0 1 0-16 0" />
             </svg>
           </div>
-          <input type="text" id="username" formControlName="username"
+          <input type="text" id="user" formControlName="user"
             class="w-full pl-10 pr-4 py-3 bg-smoke-800/50 border border-smoke-700/50 text-white rounded-lg focus:ring-2 focus:ring-peel-500 focus:border-transparent outline-none transition-all duration-200 placeholder-smoke-500 hover:border-peel-500"
             placeholder="Ingresa tu usuario" />
+            @if (isFieldInvalid('user')) {
+              <span class="text-xs text-red-500">
+                 {{ getErrorMessage('user') }}
+              </span>
+            }
         </div>
       </div>
 
@@ -56,6 +65,7 @@
           <input [type]="showPassword() ? 'text' : 'password'" id="password" formControlName="password"
             class="w-full pl-10 pr-12 py-3 bg-smoke-800/50 border border-smoke-700/50 text-white rounded-lg focus:ring-2 focus:ring-peel-500 focus:border-transparent outline-none transition-all duration-200 placeholder-smoke-500 hover:border-peel-500"
             placeholder="••••••••" />
+
           <button type="button"
             class="absolute inset-y-0 right-0 pr-3 flex items-center transition-opacity duration-200 opacity-70 hover:opacity-100"
             (click)="showPassword.set(!showPassword())">
@@ -83,6 +93,11 @@
             </svg>
             }
           </button>
+          @if (isFieldInvalid('password')) {
+            <span class="text-xs text-red-500">
+               {{ getErrorMessage('password') }}
+            </span>
+          }
         </div>
       </div>
 
@@ -108,6 +123,7 @@
 
       <!-- Botón de inicio de sesión -->
       <button type="submit"
+        [disabled]="form().invalid"
         class="w-full bg-peel-600 text-white py-3 px-4 rounded-lg hover:bg-peel-700 focus:ring-4 focus:ring-peel-800 transition-all duration-200 inline-flex items-center justify-center group hover:translate-y-[-2px] active:translate-y-0">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
