@@ -1,15 +1,56 @@
 <nav class="p-4">
-    <ul class="space-y-2">
-      @for (item of menuItems; track item.id) {
-        <li>
-          <a 
-            [routerLink]="item.route"
-            routerLinkActive="bg-peel-500/50 text-white"
-            class="flex items-center space-x-3 p-3 text-smoke-400 hover:text-white hover:bg-smoke-800/50 rounded-lg transition-all duration-200"
-            (click)="manejarClickItem(item.route)">
-            <span [innerHTML]="item.icon"></span>
-            <span>{{ item.label }}</span>
-          </a>
+    <ul class="space-y-1">
+      @for (item of menuItems(); track item.id) {
+        <li class="relative">
+          <!-- Item principal -->
+          <div 
+            [class.bg-smoke-800]="isItemActive(item)"
+            class="relative group">
+            <a 
+              [routerLink]="item.route"
+              routerLinkActive="bg-peel-500/50 text-white"
+              (click)="manejarClickItem(item)"
+              class="flex items-center justify-between w-full p-3 text-smoke-400 hover:text-white rounded-lg transition-all duration-200 group-hover:bg-smoke-800/50">
+              <div class="flex items-center space-x-3">
+                <span [innerHTML]="getSafeIcon(item.icon)" class="min-w-[20px]"></span>
+                <span>{{ item.label }}</span>
+              </div>
+              @if (item.subitems?.length) {
+                <span 
+                  class="transform transition-transform duration-200"
+                  [class.rotate-180]="expandedItems()[item.id]"
+                  (click)="manejarClickItem(item)"
+                  >
+                  
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </span>
+              }
+            </a>
+          </div>
+
+          <!-- Subitems -->
+          @if (item.subitems?.length) {
+            <div [@submenuAnimation]="expandedItems()[item.id] ? 'open' : 'closed'">
+              <ul class="mt-1 ml-7 space-y-1 border-l border-smoke-800">
+                @for (subitem of item.subitems; track subitem.id) {
+                  <li>
+                    <a 
+                      [routerLink]="subitem.route"
+                      routerLinkActive="bg-peel-500/50 text-white"
+                      (click)="handleSubItemClick()"
+                      class="flex items-center space-x-3 p-2 pl-4 text-sm text-smoke-400 hover:text-white rounded-lg transition-all duration-200 hover:bg-smoke-800/50 relative before:absolute before:left-[-1px] before:top-1/2 before:w-2 before:h-[1px] before:bg-smoke-800 hover:before:bg-smoke-400">
+                      @if (subitem.icon) {
+                        <span [innerHTML]="getSafeIcon(subitem.icon)" class="w-4 h-4"></span>
+                      }
+                      <span>{{ subitem.label }}</span>
+                    </a>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
         </li>
       }
     </ul>
