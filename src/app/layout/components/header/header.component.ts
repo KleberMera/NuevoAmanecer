@@ -5,7 +5,7 @@ import { SidebarService } from '../../../services/sidebar.service';
   selector: 'app-header',
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   private sidebarService = inject(SidebarService);
@@ -15,11 +15,14 @@ export class HeaderComponent {
   userName = signal<string>('Usuario Admin');
   //userRole: string = 'Administrador';
   userRole = signal<string>('Administrador');
-  constructor() {}
-
-  ngOnInit(): void {
-    // Inicializar datos del usuario y notificaciones
+  constructor() {
+    //Si la pantalla es desktop mostrar el sidebar
+    if (window.innerWidth >= 1024) {
+      this.sidebarService.toggle();
+    }
   }
+
+  ngOnInit(): void {}
 
   toggleNotifications(): void {
     // Implementar lógica para mostrar/ocultar notificaciones
@@ -33,11 +36,7 @@ export class HeaderComponent {
     // Implementar lógica para mostrar/ocultar menú de perfil
   }
 
-
- 
-
   toggleSidebar(): void {
     this.sidebarService.toggle();
   }
-
 }

@@ -12,15 +12,24 @@ export const routes: Routes = [
   {
     path: 'home',
     component: LayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: AdminDashboardComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+     
+    ],
     
-  },
-  {
-    path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full',
   },
   {
     path: '**',
     redirectTo: 'auth',
+    pathMatch: 'full',
   },
+  
 ];
