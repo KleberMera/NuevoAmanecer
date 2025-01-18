@@ -10,21 +10,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { MenuItem } from '../../../core/models/menu';
 
-interface SubMenuItem {
-  id: number;
-  label: string;
-  route: string;
-  icon?: string;
-}
-
-interface MenuItem {
-  id: number;
-  label: string;
-  icon: string;
-  route?: string;
-  subitems?: SubMenuItem[];
-}
 
 @Component({
   selector: 'app-sidebar-items',
@@ -58,6 +45,8 @@ export class SidebarItemsComponent {
   private readonly viewportService = inject(ViewportService);
   readonly expandedItems = signal<Record<number, boolean>>({});
   private readonly sanitizer = inject(DomSanitizer);
+
+  
   protected readonly menuItems = signal<MenuItem[]>([
     {
       id: 1,
