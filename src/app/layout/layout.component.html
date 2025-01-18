@@ -19,5 +19,7 @@
       </div>
     </main>
   </div>
-  <app-tab></app-tab>
+  @if (_screenService.isMobile()) {
+    <app-tab></app-tab>
+  }
 </div>
