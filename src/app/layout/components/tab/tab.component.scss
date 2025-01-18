@@ -1,0 +1,15 @@
+.tab-button {
+    @apply flex flex-col items-center justify-center py-1 px-1 text-smoke-400 transition-colors duration-200 relative;
+  }
+  
+  .active-tab {
+    @apply text-peel-400;
+  }
+  
+  .active-tab .active-indicator {
+    @apply opacity-100 scale-100;
+  }
+  
+  .active-tab svg {
+    @apply scale-110;
+  }
