@@ -1,6 +1,4 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, debounceTime, fromEvent, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

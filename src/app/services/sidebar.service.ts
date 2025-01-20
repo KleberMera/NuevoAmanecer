@@ -6,8 +6,8 @@ import { ViewportService } from './viewport.service';
 })
 export class SidebarService {
   private readonly _isForceOpen = signal<boolean | null>(null);
-  private  readonly viewportService = inject(ViewportService);
-  
+  private readonly viewportService = inject(ViewportService);
+
   constructor() {
     // Efecto para resetear el estado forzado cuando cambia el viewport
     effect(() => {
@@ -23,7 +23,7 @@ export class SidebarService {
   });
 
   toggle() {
-    this._isForceOpen.update(state => 
+    this._isForceOpen.update((state) =>
       state === null ? !this.isOpen() : !state
     );
   }

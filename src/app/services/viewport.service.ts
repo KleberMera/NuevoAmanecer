@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { debounceTime, fromEvent, startWith } from 'rxjs';
+import { fromEvent, startWith } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,9 @@ export class ViewportService {
   private readonly DESKTOP_BREAKPOINT = signal<number>(768);
   readonly width = signal(window.innerWidth);
 
-  readonly isDesktop = computed(() => this.width() >= this.DESKTOP_BREAKPOINT());
+  readonly isDesktop = computed(
+    () => this.width() >= this.DESKTOP_BREAKPOINT()
+  );
 
   constructor() {
     fromEvent(window, 'resize')
