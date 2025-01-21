@@ -62,7 +62,7 @@ export class SidebarItemsComponent {
         {
           id: 21,
           label: 'Lista de Usuarios',
-          route: 'usuarios',
+          route: 'lista-usuarios',
         },
         {
           id: 22,

@@ -19,7 +19,7 @@ export class AuthService {
   formlogin(data: Partial<User> = {}) {
     const form = signal<FormGroup>(
       new FormGroup({
-        user: new FormControl(data.username, [Validators.required]),
+        username: new FormControl(data.username, [Validators.required]),
         password: new FormControl(data.password, [
           Validators.required,
           Validators.minLength(8),
