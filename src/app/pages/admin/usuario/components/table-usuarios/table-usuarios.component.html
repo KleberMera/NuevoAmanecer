@@ -1,0 +1,39 @@
+<div class="mb-8">
+    <h2 class="text-2xl font-bold text-smoke-100 mb-4">Usuarios Registrados</h2>
+    <div class="overflow-x-auto rounded-lg shadow-lg">
+      <div class="min-w-full overflow-hidden">
+        <table class="w-full bg-smoke-950">
+          <thead class="bg-smoke-900">
+            <tr>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-smoke-100">ID</th>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-smoke-100">Nombre Comercial</th>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-smoke-100 hidden sm:table-cell">Teléfono</th>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-smoke-100 hidden md:table-cell">Cédula</th>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-smoke-100">Rol</th>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-smoke-100">Estado</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-smoke-700">
+            @for (datos of usuarios()?.data; track datos.id) {
+              <tr class="hover:bg-smoke-900 transition-colors">
+                <td class="px-4 md:px-6 py-4 text-xs md:text-sm text-smoke-200">{{datos.id}}</td>
+                <td class="px-4 md:px-6 py-4 text-xs md:text-sm text-smoke-200">{{datos.nombreComercial}}</td>
+                <td [class]="'px-4 md:px-6 py-4 text-xs md:text-sm  hidden sm:table-cell' + (datos.telefono == null ? ' text-peel-300 font-medium' : ' text-smoke-300 font-medium')">{{datos.telefono || 'No registrado'}}</td>
+
+                <td [class]="'px-4 md:px-6 py-4 text-xs md:text-sm  hidden md:table-cell' + (datos.cedula == null ? ' text-peel-300 font-medium' : ' text-smoke-300 font-medium')">{{datos.cedula || 'No registrado'}}</td>
+                
+                <td class="px-4 md:px-6 py-4 text-xs md:text-sm text-smoke-200">{{datos.rol.nombre}}</td>
+                <td class="px-4 md:px-6 py-4">
+                  <span class="px-2 md:px-3 py-1 text-xs font-medium rounded-full bg-peel-900 text-peel-300"
+                   [class] = "datos.estado ? 'bg-peel-900 text-peel-300' : 'bg-red-950 text-smoke-300'"
+                  >
+                    {{datos.estado ? 'Activo' : 'Inactivo'}}
+                  </span>
+                </td>
+              </tr>
+          } 
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

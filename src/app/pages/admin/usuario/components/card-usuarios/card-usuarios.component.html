@@ -1,0 +1,35 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Card 1 -->
+     @for (datos of usuarios()?.data; track datos.id) {
+      <div class="rounded-lg shadow-lg bg-smoke-950 border border-smoke-900 hover:border-peel-500 hover:shadow-xl transition-colors hover:bg-smoke-900 ">
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="h-12 w-12 rounded-full bg-peel-950 flex items-center justify-center">
+                <span class="text-peel-300 text-xl font-bold">{{getNombreCompletos(datos.nombre, datos.apellido)}}</span>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-smoke-100">{{datos.nombreComercial}}</h3>
+                <p class="text-sm text-smoke-400">{{datos.rol.nombre}}</p>
+              </div>
+            </div>
+            <span class="h-3 w-3 rounded-full bg-peel-400"></span>
+          </div>
+          
+          <div class="space-y-3">
+            <div>
+              <p class="text-sm font-medium text-smoke-400">Telefono</p>
+              <p class="text-smoke-200 break-all">{{datos.telefono === null ? 'No registrado' : ''}}</p>
+            </div>
+            <!-- <div>
+              <p class="text-sm font-medium text-smoke-400">Fecha de registro</p>
+              <p class="text-smoke-200">22 Enero, 2025</p>
+            </div> -->
+            <div>
+              <p class="text-sm font-medium text-smoke-400">Estado de la cuenta</p>
+              <p class="text-peel-300 font-medium">{{datos.estado ? 'Activo' : 'Inactivo'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+     }
