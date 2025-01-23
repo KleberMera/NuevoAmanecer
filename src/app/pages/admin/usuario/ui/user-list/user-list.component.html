@@ -1,10 +1,8 @@
-<div class="font-quicksand p-4 md:p-6 min-h-screen">
-  <!-- Table Section -->
-
-  @if (_screenService.isDesktop()) {
-  <app-table-usuarios [usuarios]="usuarios.value()"></app-table-usuarios>
-  } @if (_screenService.isMobile()) {
+<div class="p-4 md:p-6 min-h-screen">
+  @if (_screenService.isMobile()) {
   <app-card-usuarios [usuarios]="usuarios.value()"></app-card-usuarios>
 
+  } @else {
+  <app-table-usuarios [usuarios]="usuarios.value()"></app-table-usuarios>
   }
 </div>

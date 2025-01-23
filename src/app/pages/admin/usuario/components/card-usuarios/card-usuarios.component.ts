@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { Usuario } from '../../../../../core/models/usuario';
 import { apiResponse } from '../../../../../core/models/apiResponse';
 
@@ -13,10 +13,12 @@ export class CardUsuariosComponent {
   usuarios = input<apiResponse<Usuario[]>>();
 
 
-  getNombreCompletos(nombre : string, apellido: string): string {
-    // return `${nombre} ${apellido}`;
-    //Solo queremos las iniciales en mayusculas
-    return `${nombre.charAt(0).toUpperCase()}${apellido.charAt(0).toUpperCase()}`;
-   }
-  
+  getInitials = (usuario: Usuario) => computed(() => {
+    const nombre = usuario.nombre.charAt(0).toUpperCase();
+    const apellido = usuario.apellido.charAt(0).toUpperCase();
+    return `${nombre}${apellido}`;
+  });
+
+
+
 }
